@@ -20,8 +20,8 @@ android {
         }
 
         python {
-            //buildPython "C:/Users/gmocc/AppData/Local/Microsoft/WindowsApps/python.exe"
-            buildPython "C:/Users/danie/AppData/Local/Microsoft/WindowsApps/python.exe"
+            buildPython "C:/Users/gmocc/AppData/Local/Microsoft/WindowsApps/python.exe"
+           // buildPython "C:/Users/danie/AppData/Local/Microsoft/WindowsApps/python.exe"
             buildPython "python"
             pip {
                 // A requirement specifier, with or without a version number:
@@ -45,8 +45,8 @@ android {
             main {
                 //python.srcDir "C:/Users/danie/AndroidStudioProjects/androidStuff/Dolgio/app/src/main/java/com/example/dolgio"
                 
-                python.srcDir "C:/Users/danie/Desktop/androidStuff/Dolgio/app/src/main/java/com/example/dolgio"
-                //python.srcDir "C:/Users/gmocc/AndroidStudioProjects/Dolgio/app/src/main/java/com/example/dolgio"
+                //python.srcDir "C:/Users/danie/Desktop/androidStuff/Dolgio/app/src/main/java/com/example/dolgio"
+                  python.srcDir "C:/Users/gmocc/AndroidStudioProjects/Dolgio/app/src/main/java/com/example/dolgio"
             }
         }
         externalNativeBuild {
