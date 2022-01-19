@@ -45,7 +45,7 @@ face_cascade = cv2.CascadeClassifier(
 
 # Load model to face classification
 # model was created in me_not_me_classifier.ipynb notebook
-model_name = 'face_classifier_MobileNet_15.h5'
+model_name = 'model.tflite'
 
 face_classifier = keras.models.load_model(f'models/{model_name}')
 class_names = ['me', 'not_me']
@@ -101,7 +101,7 @@ def get_extended_image(img, x, y, w, h, k=0.1):
 # In[6]:
 
 
-video_capture = cv2.VideoCapture(0)  # webcamera
+video_capture = cv2.VideoCapture(0 )  # webcamera
 
 if not video_capture.isOpened():
     print("Unable to access the camera")
@@ -130,7 +130,7 @@ while True:
     for (x, y, w, h) in faces:
         # for each face on the image detected by OpenCV
         # get extended image of this face
-        face_image = get_extended_image(frame, x, y, w, h, 1)
+        face_image = get_extended_image(frame, x, y, w, h, 0.5)
 
         # classify face and draw a rectangle around the face
         # green for positive class and red for negative

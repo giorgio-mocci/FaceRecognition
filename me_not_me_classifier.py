@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Import Libraries
-
-# In[1]:
-
+# # Import Librarie
 
 # Common imports
 
@@ -19,11 +16,10 @@ import seaborn as sns
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[2]:
+
 
 
 # TensorFlow imports
-# may differs from version to versions
 
 import tensorflow as tf
 from tensorflow import keras
@@ -34,14 +30,14 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.preprocessing import image
 
 
-# ## Set Some Parameters
 
-# In[3]:
+
+
 
 
 # Dataset information
 
-# Test dataset is set explicitly, because the amount of data is very small
+
 train_image_folder = os.path.join('datasets', 'face_dataset_train_images')
 test_image_folder = os.path.join('datasets', 'face_dataset_test_images')
 img_height, img_width = 250, 250  # size of images
@@ -49,17 +45,13 @@ num_classes = 2  # me - not_me
 
 # Training settings
 validation_ratio = 0.15  # 15% for the validation
-batch_size = 16
+batch_size = 16 #Number of samples per batch. If unspecified, batch_size will default to 32.
 
 AUTOTUNE = tf.data.AUTOTUNE
 
 
-# ## Create Dataset
 
-# ### Read datasets from folders
-
-# In[4]:
-
+#### Read datasets from folders
 
 # Train and validation sets
 train_ds = keras.preprocessing.image_dataset_from_directory(
@@ -83,7 +75,6 @@ val_ds = keras.preprocessing.image_dataset_from_directory(
     shuffle=True)
 
 
-# In[5]:
 
 
 # Test set
@@ -94,7 +85,6 @@ test_ds = keras.preprocessing.image_dataset_from_directory(
     shuffle=False)
 
 
-# In[6]:
 
 
 class_names = test_ds.class_names
@@ -103,23 +93,19 @@ class_names
 
 # # Build The Model (ResNet50)
 
-# In[7]:
-
-
 base_model = keras.applications.ResNet50(weights='imagenet',
                                          include_top=False,  # without dense part of the network
                                          input_shape=(img_height, img_width, 3))
 
 
-# In[8]:
-
+#
 
 # Set layers to non-trainable
 for layer in base_model.layers:
     layer.trainable = False
 
 
-# In[9]:
+
 
 
 # Add custom layers on top of ResNet
@@ -132,7 +118,7 @@ face_classifier = keras.models.Model(inputs=base_model.input,
 face_classifier.summary()
 
 
-# In[10]:
+
 
 
 # ModelCheckpoint to save model in case of interrupting the learning process
@@ -151,7 +137,7 @@ earlystop = EarlyStopping(monitor='val_loss',
 callbacks = [earlystop, checkpoint]
 
 
-# In[11]:
+
 
 
 face_classifier.compile(loss='categorical_crossentropy',
@@ -161,13 +147,12 @@ face_classifier.compile(loss='categorical_crossentropy',
 
 # # Training
 
-# In[12]:
 
 
 epochs = 50
 
 
-# In[13]:
+
 
 
 history = face_classifier.fit(
@@ -181,26 +166,11 @@ face_classifier.save("models/face_classifier.h5")
 
 # # Testing
 
-# In[14]:
+
 
 
 def test_image_classifier_with_folder(model, path, y_true, img_height=250, img_width=250, class_names=['me', 'not_me']):
-    '''
-    Read all images from 'path' using tensorflow.keras.preprocessing.image module,
-    than classifies them using 'model' and compare result with 'y_true'.
-    Calculate total accuracy based on 'path' test set.
 
-    Parameters:
-        model : Image classifier
-        path (str): Path to the folder with images you want to test classifier on
-        y_true : True label of the images in the folder. Must be in 'class_names' list
-        img_height (int): The height of the image that the classifier can process
-        img_width (int): The width of the image that the classifier can process
-        class_names (array-like): List of class names
-
-    Returns:
-        None
-    '''
     num_classes = len(class_names)  # Number of classes
     total = 0  # number of images total
     correct = 0  # number of images classified correctly
@@ -232,14 +202,11 @@ def test_image_classifier_with_folder(model, path, y_true, img_height=250, img_w
         correct/total*100, correct, total))
 
 
-# In[15]:
+
 
 
 model_name = 'face_classifier.h5'
 face_classifier = keras.models.load_model(f'models/{model_name}')
-
-
-# In[16]:
 
 
 test_image_classifier_with_folder(face_classifier,
@@ -247,7 +214,7 @@ test_image_classifier_with_folder(face_classifier,
                                   y_true='me')
 
 
-# In[17]:
+
 
 
 test_image_classifier_with_folder(face_classifier,
@@ -255,9 +222,9 @@ test_image_classifier_with_folder(face_classifier,
                                   y_true='not_me')
 
 
-# ## Test of particular image
 
-# In[18]:
+
+
 
 
 test_path = 'datasets/face_dataset_test_images/me/me_(69).jpg'
@@ -265,7 +232,7 @@ test_image = image.load_img(test_path, target_size=(img_height, img_width, 3))
 test_image
 
 
-# In[19]:
+
 
 
 test_image = image.img_to_array(test_image)  # from image to array
@@ -276,6 +243,3 @@ result = face_classifier.predict(test_image)
 for index in range(num_classes):
     print("{:6} with probabily of {:.2f}%".format(
         class_names[index], result[0][index] * 100))
-
-
-# In[ ]:

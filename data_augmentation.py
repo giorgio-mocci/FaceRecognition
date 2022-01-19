@@ -171,48 +171,6 @@ plt.axis("off")
 
 # ### Option 1 - Generate n * batch_size random samples
 
-# In[22]:
-
-
-n = 10
-
-aug_image_folder = os.path.join('datasets', 'face_dataset_train_aug_images')
-if not os.path.exists(aug_image_folder):
-    os.makedirs(aug_image_folder)  # create folder if doesn't exist
-
-# Note that the content of the folder is not deleted and files are added at every step
-
-
-# In[23]:
-
-
-train_generator.save_to_dir = aug_image_folder
-train_generator.save_format = 'jpg'
-
-# If 'save_to_dir' is set, `next()` method
-# will generate `batch_size` images each time
-# and save them to 'save_to_dir' folder
-
-for i in range(n):
-    print("Step {} of {}".format(i+1, n))
-    train_generator.next()
-    print("\tGenerate {} random images".format(train_generator.batch_size))
-
-print("\nTotal number images generated = {}".format(n*train_generator.batch_size))
-
-
-# In[24]:
-
-
-# One of the problem is to label data again - so you need to create two ImageDataGenerator objects
-
-# This example is good, and this dataset can be successfully used to train CNN,
-# but if you want to get more control, we can set number of images we want to get explicitly
-
-
-# ### Option 2 - Generate n samples for each image
-
-# In[25]:
 
 
 n = 5

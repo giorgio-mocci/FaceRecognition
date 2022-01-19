@@ -28,7 +28,10 @@ path = "provastatica/"
 # ## Load Model
 # Load model to face classification
 # model was created in me_not_me_classifier.ipynb notebook
-model_name = 'face_classifier.h5'
+#model_name = 'face_classifier.h5'
+model_name = 'face_classifierMOBILENET.h5'
+
+
 face_classifier = keras.models.load_model(f'models/{model_name}')
 class_names = ['me', 'not_me']
 
@@ -60,7 +63,7 @@ def compute(filename, result_list):
         # get coordinates
         x, y, w, h = result['box']
 
-        k=1
+        k=0.5
         if x - k*w > 0:
             start_x = int(x - k*w)
         else:
@@ -76,6 +79,7 @@ def compute(filename, result_list):
 
         # create the shape
         face_image= img[start_y:end_y,start_x:end_x]
+        #face_image= img[y:h,x:w]
         face_image = tf.image.resize(face_image, [250, 250])
         face_image = np.expand_dims(face_image, axis=0)
         result = face_classifier.predict(face_image)
