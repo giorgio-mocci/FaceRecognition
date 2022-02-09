@@ -83,6 +83,7 @@ def compute(filename, result_list):
         face_image = tf.image.resize(face_image, [250, 250])
         face_image = np.expand_dims(face_image, axis=0)
         result = face_classifier.predict(face_image)
+        print("ATTENZIONE" + str(result))
         prediction = class_names[np.array(
             result[0]).argmax(axis=0)]  # predicted class
         confidence = np.array(result[0]).max(axis=0)  # degree of confidence

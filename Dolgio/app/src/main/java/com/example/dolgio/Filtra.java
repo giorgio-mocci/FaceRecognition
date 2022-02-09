@@ -78,7 +78,7 @@ public class Filtra extends AppCompatActivity {
         public void run() {
             Message msg = mHandler.obtainMessage();
             Bundle bundle = new Bundle();
-            //python
+
             PyObject obj = py.getModule("detector").callAttr("main");
 
 
@@ -205,22 +205,17 @@ public class Filtra extends AppCompatActivity {
                 for (int i = 0; i < cout; i++) {
                     // adding imageuri in array
                     Uri imageurl = data.getClipData().getItemAt(i).getUri();
-                    System.out.println("ORA STAMPO L IMAGE URL" + imageurl);
                     mArrayUri.add(imageurl);
                 }
                 // setting 1st selected image into image switcher
-                System.out.println("STO PER SETTARE L IMMAGINE prima dell if" + mArrayUri.get(0).toString());
                 imageView.setImageURI(mArrayUri.get(0));
                 position = 0;
                 MainActivity.filtro.setUri(mArrayUri);
             } else {
-                mArrayUri.clear();
                 Uri imageurl = data.getData();
                 mArrayUri.add(imageurl);
                 imageView.setImageURI(mArrayUri.get(0));
                 position = 0;
-                System.out.println("STO PER SETTARE L IMMAGINE dopo lì if "+ mArrayUri.get(0) );
-                MainActivity.filtro.setUri(mArrayUri);
             }
         } else {
             // show this if no image is selected

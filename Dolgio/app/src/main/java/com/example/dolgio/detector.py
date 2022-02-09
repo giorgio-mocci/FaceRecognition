@@ -7,15 +7,16 @@
 import os
 import json
 from matplotlib import pyplot
+
 import tflite_runtime.interpreter as tflite
 import tensorflow as tf
-from tensorflow import keras
+
 
 # Common imports
 import numpy as np
 from mtcnn.mtcnn import MTCNN
 from os.path import dirname, join
-import time
+
 import cv2
 
 
@@ -62,6 +63,8 @@ def compute(filename, result_list):
             # create the shape
             face_image = img[start_y:end_y, start_x:end_x]
             face_image = tf.image.resize(face_image, [250, 250])
+
+
             face_image = np.expand_dims(face_image, axis=0)
 
             # Get input and output tensors.
@@ -80,11 +83,11 @@ def compute(filename, result_list):
             confidence = np.array(result[0]).max(axis=0)  # degree of confidence
 
             if prediction == 'me':
-                print("SI PORCODIO")
+                print("SI")
                 found = True
 
             else:
-                print("NO PORCODIO")
+                print("No")
 
 
 

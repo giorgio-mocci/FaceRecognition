@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,7 +95,7 @@ public class Filtro {
 
         System.out.println("oggetto arrivato");
         if(str==null){
-            System.out.println(" TI INCULI FORTE");
+            System.out.println("errore");
             return null;
         }
 //        System.out.println("stampo lista");
@@ -120,62 +118,25 @@ public class Filtro {
         }
         this.setUri(result);
         System.out.println("fine");
+        int m[][] = new int[2][3];
         return result;
 
 
 
-    }
 
-
-    public static String getPath(final Context context, final Uri uri) {
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
-        // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-            System.out.println("getPath() uri: " + uri.toString());
-            System.out.println("getPath() uri authority: " + uri.getAuthority());
-            System.out.println("getPath() uri path: " + uri.getPath());
-
-            // ExternalStorageProvider
-            if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-                System.out.println("getPath() docId: " + docId + ", split: " + split.length + ", type: " + type);
-
-                // This is for checking Main Memory
-                if ("primary".equalsIgnoreCase(type)) {
-                    if (split.length > 1) {
-                        return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
-                    } else {
-                        return Environment.getExternalStorageDirectory() + "/";
-                    }
-                    // This is for checking SD Card
-                } else {
-                    return "storage" + "/" + docId.replace(":", "/");
-                }
-
-            }
-        }
-        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean memorizza() {
         System.out.println("memorizza()");
         int position = 0;
-
         for (Uri uri : this.mArrayUri) {
-            System.out.println("ORA STAMPO L'URI "+ uri.toString());
-
-            String filePath =  getPath(this.context, uri  ) ;
-           // String filePath = getRealPathFromURI(uri);
+            String filePath = this.getRealPathFromURI(uri);
             System.out.println(filePath);
             try {
                 String file = position+".jpg";
                 String nomeFile = "/data/user/0/com.example.dolgio/app_files/"+file;
                 System.out.println(nomeFile);
-
                 Files.copy(Paths.get(filePath), Paths.get(nomeFile), StandardCopyOption.REPLACE_EXISTING);
                 this.map.put(file, uri);
             } catch (IOException e) {

@@ -7,28 +7,28 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/buttonAddestra"
+        android:id="@+id/buttonPy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:onClick="addestra"
-        android:text="ADDESTRA"
+        android:onClick="chaquo"
+        android:text="Usa Python"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonFiltra"
+        android:id="@+id/buttonNonChaquo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:onClick="filtra"
-        android:text="FILTRA FOTO"
+        android:onClick="nonChaquo"
+        android:text="Non usare Python"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddestra" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPy" />
 
     <TextView
         android:id="@+id/textView4"

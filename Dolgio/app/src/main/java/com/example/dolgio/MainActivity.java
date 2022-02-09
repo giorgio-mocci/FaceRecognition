@@ -33,6 +33,7 @@ import java.io.OutputStream;
 public class MainActivity extends AppCompatActivity {
 
     private static final int EXTERNAL_STORAGE = 0;
+    private static final int CAMERA = 1;
     static Python py;
 
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, EXTERNAL_STORAGE);
-
+        checkPermission(Manifest.permission.CAMERA, CAMERA);
 
         checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, EXTERNAL_STORAGE);
 
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             Python.start(new AndroidPlatform(MainActivity.this));
         }
         py = Python.getInstance();
+
 
 //        if (!Python.isStarted()) {
 //            Python.start(new AndroidPlatform(this));
@@ -97,18 +99,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addestra(View view) {
+    public void chaquo(View view) {
 
 
-        Intent intent = new Intent(this, Addestra.class);
+        Intent intent = new Intent(this, Filtra.class);
         startActivity(intent);
 
     }
 
-    public void filtra(View view) {
+    public void nonChaquo(View view) {
 
 
-        Intent intent = new Intent(this, Filtra.class);
+        Intent intent = new Intent(this, MainActivityNonChaquo.class);
         startActivity(intent);
 
     }
