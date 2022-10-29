@@ -47,7 +47,7 @@ We have also developed some helper scripts in Python to test and improve our wor
 Group members: <br>
 - [Giorgio Mocci](https://github.com/giorgio-mocci)
 - [Daniel Rajer](https://github.com/telespalladaniel)
-- [bibliography](https://towardsdatascience.com/how-to-create-real-time-face-detector-ff0e1f81925f)
+- [Bibliography](https://towardsdatascience.com/how-to-create-real-time-face-detector-ff0e1f81925f)
 
 
 
