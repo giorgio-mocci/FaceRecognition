@@ -1,0 +1,1 @@
+Put here several images of user face in order to train the model
