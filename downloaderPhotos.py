@@ -1,7 +1,7 @@
 import requests
 
 file = open('dataset.csv', 'r')
-print("provsa")
+
 count =0
 
 dizionario = ""
