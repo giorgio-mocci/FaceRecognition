@@ -40,3 +40,14 @@ We have also developed some helper scripts in Python to test and improve our wor
 - convertiImg.py -> this script converts all images in a folder in .PNG format  <br>
 - webcam.py -> this script perform a live face detection using the before-trained model with PC camera <br>
 - face&resize.py -> this script finds all the faces in the pictures and saves the images of the faces in a standars 250x250 pixel format
+
+
+## Credits
+
+Group members: <br>
+- [Giorgio Mocci](https://github.com/giorgio-mocci)
+- [Daniel Rajer](https://github.com/telespalladaniel)
+- [bibliography](https://towardsdatascience.com/how-to-create-real-time-face-detector-ff0e1f81925f)
+
+
+
